@@ -1,4 +1,8 @@
 .DS_Store
 node_modules/
 dist/
+report/
 npm-debug.log
+selenium-debug.log
+test/sel-serv.jar
+test/chromedriver.exe
