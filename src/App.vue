@@ -3,7 +3,13 @@
     <p id="balance-title">餘額</p>
     <p id="balance-value">{{ balance }}</p>
     <input id="money" type="number" v-model="money"  debounce="500" v-on:keyup.enter="moneyHandler">
-
+    <ul class="records">
+      <li class="record" v-for="record in records">
+        <div>
+          <label>{{ record.value }}</label>
+        </div>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -12,7 +18,9 @@ export default {
   data () {
     return {
       balance: 0,
-      money: 0
+      money: 0,
+      records: [],
+      recordIdCounter: 0
     }
   },
   methods: {
@@ -25,11 +33,16 @@ export default {
     },
     spendMoney: function () {
       this.balance -= this.money;
+      this.addRecord(-1 * this.money);
       this.money = null;
     },
     saveMoney: function () {
       this.balance += this.money;
+      this.addRecord(this.money);
       this.money = null;
+    },
+    addRecord: function (value) {
+      this.records.unshift({ id: this.recordIdCounter++, value: value });
     }
   }
 }
