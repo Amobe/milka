@@ -2,7 +2,7 @@
   <div id="app">
     <div class="background">
       <p id="balance-value">{{ balance }}</p>
-      <input id="money" class="moneyInput" type="number" v-model="money"  debounce="500" v-on:keyup.enter="moneyHandler">
+      <input id="money" class="moneyInput" type="number" v-model="money" debounce="500" v-on:keyup.enter="moneyHandler">
       <ul class="records">
         <li class="record" :class="{save: record.value > 0, spend: record.value < 0}" v-for="record in records">
           <div>
@@ -19,7 +19,7 @@ export default {
   data () {
     return {
       balance: 0,
-      money: 0,
+      money: null,
       records: [],
       recordIdCounter: 0
     }
