@@ -3,7 +3,6 @@ module.exports = {
         browser
             .url('http://localhost:8081')
             .waitForElementVisible('body', 1000)
-            .assert.containsText('#balance-title', '餘額')
             .assert.containsText('#balance-value', '0')
             .end();
     },
@@ -12,7 +11,6 @@ module.exports = {
         browser
             .url('http://localhost:8081')
             .waitForElementVisible('body', 1000)
-            .assert.containsText('#balance-title', '餘額')
             .assert.containsText('#balance-value', '0')
             .setValue('input#money', ['abcde', browser.Keys.ENTER])
             .assert.containsText('#balance-value', '0')
@@ -23,7 +21,6 @@ module.exports = {
         browser
             .url('http://localhost:8081')
             .waitForElementVisible('body', 1000)
-            .assert.containsText('#balance-title', '餘額')
             .assert.containsText('#balance-value', '0')
             .setValue('input#money', ['152', browser.Keys.ENTER])
             .assert.containsText('#balance-value', '-152')
@@ -35,7 +32,6 @@ module.exports = {
         browser
             .url('http://localhost:8081')
             .waitForElementVisible('body', 1000)
-            .assert.containsText('#balance-title', '餘額')
             .assert.containsText('#balance-value', '0')
             .setValue('input#money', ['152', browser.Keys.SHIFT + browser.Keys.ENTER])
             .assert.containsText('#balance-value', '152')
@@ -47,7 +43,6 @@ module.exports = {
         browser
             .url('http://localhost:8081')
             .waitForElementVisible('body', 1000)
-            .assert.containsText('#balance-title', '餘額')
             .assert.containsText('#balance-value', '0')
             .setValue('input#money', ['152', browser.Keys.ENTER])
             .assert.containsText('li.record:nth-child(1)', '-152')

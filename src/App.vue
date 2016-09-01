@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <div class="background">
-      <p id="balance-title">餘額</p>
       <p id="balance-value">{{ balance }}</p>
       <input id="money" class="moneyInput" type="number" v-model="money"  debounce="500" v-on:keyup.enter="moneyHandler">
       <ul class="records">
