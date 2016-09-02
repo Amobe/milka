@@ -2,7 +2,7 @@
   <div id="app">
     <div class="background">
       <p id="balance-value">{{ balance }}</p>
-      <input id="money" class="moneyInput" type="number" v-model="money" debounce="500" v-on:keyup.enter="moneyHandler">
+      <money-input @update-balance="updateBalance" @add-record="addRecord"></money-input>
       <ul class="records">
         <li class="record" :class="{save: record.value > 0, spend: record.value < 0}" v-for="record in records">
           <div>
@@ -15,32 +15,21 @@
 </template>
 
 <script>
+import MoneyInput from './components/MoneyInput';
 export default {
+  components: {
+    MoneyInput
+  },
   data () {
     return {
       balance: 0,
-      money: null,
       records: [],
       recordIdCounter: 0
     }
   },
   methods: {
-    moneyHandler: function (event) {
-      if (event && event.shiftKey) {
-        this.saveMoney();
-      } else {
-        this.spendMoney();
-      }
-    },
-    spendMoney: function () {
-      this.balance -= this.money;
-      this.addRecord(-1 * this.money);
-      this.money = null;
-    },
-    saveMoney: function () {
-      this.balance += this.money;
-      this.addRecord(this.money);
-      this.money = null;
+    updateBalance: function (value) {
+      this.balance += value;
     },
     addRecord: function (value) {
       this.records.unshift({ id: this.recordIdCounter++, value: value });
@@ -52,12 +41,6 @@ export default {
 <style>
 body {
   font-family: Helvetica, sans-serif;
-}
-
-input#money::-webkit-inner-spin-button,
-input#money::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
 }
 
 .background {
@@ -73,16 +56,6 @@ input#money::-webkit-outer-spin-button {
   font-weight: bolder;
   margin: auto 0;
   padding: 30px 0 20px 0;
-}
-
-.moneyInput {
-  width: 90%;
-  font-size: 24pt;
-  text-align: right;
-  margin: 10px auto;
-  padding: 5px 10px;
-  color: #333;
-  border: 2px solid #333;
 }
 
 ul.records {
